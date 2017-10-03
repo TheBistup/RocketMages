@@ -1,1 +1,41 @@
-...
+Naming information:
+Each name should be divided into its relevant section and then sub-sections by underscores, and should be in lower case:
+
+Main sections are as follows:
+
+map:
+  event
+  magic
+  space
+  real
+  
+character:
+  wizard
+  soldier
+  robot
+  spaceman
+  alien
+  special
+
+weapon:
+  magic
+  technology
+  old
+  alien
+  space
+  
+projectile:
+  magic
+  technology
+  old
+  alien
+  space
+  
+---
+
+these would then be preceded by asset name and number
+
+e.g. weapon_magic_staff_1
+     map_space_rocket_2
+     projectile_technology_bullet_1
+     character_robot_cyborg_5
