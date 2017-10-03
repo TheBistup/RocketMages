@@ -102,7 +102,7 @@ class Sign_in(tk.Frame):
         self.login_button = Button(self, text="Login", command=open_main_program())
 
 
-        self.login_button.pack()
+        self.login_button.grid(row=2,column=2)
 
 
 def open_main_program():
@@ -118,7 +118,10 @@ class News(tk.Frame):
         self.label_3 = Label(self, text="---> Version 1.0 released to git hub!", font=Medium)
         self.button_1 = Button(self, text="<-- go back", command=lambda: controller.show_frame(Welcome))
 
-        self.pack()
+        self.label_1.pack()
+        self.label_2.pack()
+        self.label_3.pack()
+        self.button_1.pack()
 
 
 class Future_patches(tk.Frame):
@@ -128,7 +131,11 @@ class Future_patches(tk.Frame):
 
         self.label_1 = Label(self, text="Future Changes",fg="green", font=BIG)
         self.label_2= Label(self, text="In future we hope to add multiplayer and many other amazing functions! keep up with the news by visiting the news page.", font=small)
-        self.button_1 = Button(self, text="<-- go back", command= lambda: controller.show_frame(Welcome) )
+        self.button_1 = Button(self, text="<-- go back", command= lambda: controller.show_frame(Welcome))
+        
+        self.label_1.pack()
+        self.label_2.pack()
+        self.button_1.pack()
     
 application = RocketMages_Setup()
 application.geometry("1920x1080")
