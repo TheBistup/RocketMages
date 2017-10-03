@@ -79,6 +79,7 @@ class Welcome(tk.Frame):
         label_1 = Label(self, text="Welcome", font=BIG)
         button_1 = Button(self, text="Sign in", command=lambda: controller.show_frame(Sign_in))
         button_2 = Button(self, text="News",command=lambda: controller.show_frame(News))
+        button_3 = Button(self, text="Future updates",command=lambda: controller.show_frame(Future_patches))
 
         label_1.pack()
         button_1.pack()
