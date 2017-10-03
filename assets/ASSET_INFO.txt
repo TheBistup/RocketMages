@@ -40,4 +40,4 @@ these would then be preceded by asset name and number
 e.g. weapon_magic_staff_1
      map_space_rocket_2
      projectile_technology_bullet_1
-     character_robot_cyborg_5
+     character_robot_cyborg_5_-x
