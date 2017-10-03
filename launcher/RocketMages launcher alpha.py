@@ -16,8 +16,8 @@ import os
 
 
 print("[!]Loading game data...")
-
-BIG = ("Helvetica",12)
+HUGE = ("Helvetica",46)
+BIG = ("Helvetica",16)
 Medium = ("Helvetica",10)
 small = ("Helvetica",8)
 print("[!]Finalizing...")
@@ -64,7 +64,7 @@ class RocketMages_Setup(tk.Tk):
 class Launcher(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label_1 = Label(self, text="Rocket Mages Launcher", font=BIG)
+        label_1 = Label(self, text="Rocket Mages Launcher", font=HUGE)
         button_1 = Button(self, text="Proceed", font=Medium, command=lambda: controller.show_frame(Welcome))
         label_2 = Label(self, text="--->", font=small)
 
@@ -76,7 +76,7 @@ class Welcome(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
         
-        label_1 = Label(self, text="Welcome", font=BIG)
+        label_1 = Label(self, text="Welcome", font=HUGE)
         button_1 = Button(self, text="Sign in", command=lambda: controller.show_frame(Sign_in))
         button_2 = Button(self, text="News",command=lambda: controller.show_frame(News))
         button_3 = Button(self, text="Future updates",command=lambda: controller.show_frame(Future_patches))
@@ -130,7 +130,7 @@ class Future_patches(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
 
-        self.label_1 = Label(self, text="Future Changes",fg="green", font=BIG)
+        self.label_1 = Label(self, text="Future Changes",fg="green", font=HUGE)
         self.label_2= Label(self, text="In future we hope to add multiplayer and many other amazing functions! keep up with the news by visiting the news page.", font=small)
         self.button_1 = Button(self, text="<-- go back", command= lambda: controller.show_frame(Welcome))
         
