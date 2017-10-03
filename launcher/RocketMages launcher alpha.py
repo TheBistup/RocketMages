@@ -84,6 +84,7 @@ class Welcome(tk.Frame):
         label_1.pack()
         button_1.pack()
         button_2.pack()
+        button_3.pack()
 class Sign_in(tk.Frame):
     
     def __init__(self, parent, controller):
