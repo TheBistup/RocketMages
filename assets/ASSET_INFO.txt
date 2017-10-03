@@ -16,6 +16,8 @@ character:
   spaceman
   alien
   special
+  
+  ## NOTE : CHARACTER MODELS NEED A DIRECTION AFTER THEIR NUMBER (x, -x, y, -y) so that they can change looking direction ##
 
 weapon:
   magic
