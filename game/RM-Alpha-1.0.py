@@ -50,13 +50,13 @@ def Play(gameDisplay, clock):
                 if event.key == pygame.K_LEFT:
                     charX -= 3
                     direction = "x"
-                elif event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     charX += 3
                     direction = "-x"
-                elif event.key == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     charY -= 3
                     direction = "y"
-                elif event.key == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN:
                     charY += 3
                     direction = "-y"
             if event.type == pygame.KEYUP:
