@@ -16,12 +16,11 @@ import os
 
 
 print("[!]Loading game data...")
-main = Tk()
+
 BIG = ("Helvetica",12)
 Medium = ("Helvetica",10)
 small = ("Helvetica",8)
 print("[!]Finalizing...")
-main.wm_title("RocketMages launcher")
 
 try:
     with open("screensettings","r") as settings:
