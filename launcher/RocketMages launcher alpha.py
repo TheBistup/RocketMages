@@ -107,7 +107,7 @@ class Sign_in(tk.Frame):
 
 def open_main_program():
     os.chdir("..\\game\\")
-    os.system("start RM.py")
+    os.system("start RM-Alpha-1.0.py")
 class News(tk.Frame):
     
     def __init__(self, parent, controller):
