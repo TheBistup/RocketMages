@@ -18,8 +18,8 @@ import os
 print("[!]Loading game data...")
 HUGE = ("Helvetica",46)
 BIG = ("Helvetica",16)
-Medium = ("Helvetica",10)
-small = ("Helvetica",8)
+Medium = ("Helvetica",12)
+small = ("Helvetica",10)
 print("[!]Finalizing...")
 
 try:
