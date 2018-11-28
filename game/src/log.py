@@ -29,7 +29,7 @@ class NetLog():
             open("net.log","r").read()
             self.f = open("net.log","a")
         except:
-            open("net.log","w").write("ROCKET MAGES GAME LOG")
+            open("net.log","w").write("ROCKET MAGES NET LOG")
             self.f = open("net.log","a")
 
         self.start_time = time.time()
