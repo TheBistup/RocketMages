@@ -1,0 +1,7 @@
+
+
+Ok now this is epic:
+
+User server structure file:
+
+user_name|character|user_number|user_x|user_y|direction

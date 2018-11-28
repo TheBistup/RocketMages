@@ -8,9 +8,9 @@ class Search():
         pass
 
 class Server():
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, username, character):
         log.log("Server class initialised.")
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock = socket.socket()
         while True:
             try:
                 self.sock.connect((ip, port))
@@ -18,6 +18,12 @@ class Server():
                 delay = 2
                 log.log("Server refused connection. Wait %s seconds before retry." % (str(delay)))
                 time.sleep(2)
+
+        if self.sock.recv(1024).decode() == "+--SEND-INIT--+":
+            log.log("Recieved initial character data request")
+            self.sock.send(str.encode("username|character"))
+
+            ### Get random start pos from server?
 
     def get_init(self):
         self.sock.send(str.encode("--+get-init+--"))

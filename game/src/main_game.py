@@ -18,6 +18,7 @@ class Game():
 
 
     def mainloop(self):
+        server = net_code.Server("127.0.0.1", 24456, "TrialUsername","basic")
         while not self.crashed:
             self.clock.tick(60) ## settings?
             self.event_handler()
