@@ -49,7 +49,7 @@ class Server():
             data = self.clients[i][0].recv(1024).decode()
             print("[!] Data from: " + str(self.clients[i][1]) + ": ", data)
             if data == "--+get-init+--":
-                self.clients[i][0]
+                print("[!] Got request for initial data from " + str(self.clients[i][1]))
 
 
 

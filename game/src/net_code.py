@@ -33,48 +33,6 @@ class Server():
 
     def get_init(self):
         self.sock.send(str.encode("--+get-init+--"))
-        init_file = ""
-        data = ""
-
-        while "--+end+--" not in data:
-            data = self.sock.recv(1024).decode()
-            init_file += data
-
-        log.log("Got initial server information.")
-
-        open("map.rminfo","w").write(init_file)
-        return True
-
-
-    def get_char_data(self):
-        self.sock.send(str.encode("--+get-char+--"))
-        char_file = ""
-        data = ""
-
-        while "--+end+--" not in data:
-            data = self.sock.recv(1024).decode()
-            char_file += data
-
-
-        log.log("Got character info successfully.")
-
-        open("char.rminfo","w").write(char_file)
-        return True
-
-    def get_entity_data(self):
-        self.sock.send(str.encode("--+get-entity+--"))
-        ent_file = ""
-        data = ""
-
-        while "--+end+--" not in data:
-            data = self.sock.recv(1024).decode()
-            ent_file += data
-
-
-        log.log("Got entity info successfully.")
-
-        open("entity.rminfo","w").write(char_file)
-        return True
 
     def send_char_info(user, data):
         move_to_x = data["move_to"][0]
