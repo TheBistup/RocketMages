@@ -9,12 +9,24 @@ log.log("Starting game...")
 
 class Game():
     def __init__(self):
+        self.crashed = False
         pygame.init()
         self.crashed = False
         self.clock = pygame.time.Clock()
-        self.display = pygame.display.set_mode((1000, 1000)) ## settings?
+        self.display = pygame.display.set_mode((400, 400)) ## settings?
+        self.mainloop()
 
 
-    def mainloop():
-        while not crashed:
+    def mainloop(self):
+        while not self.crashed:
             self.clock.tick(60) ## settings?
+            self.event_handler()
+
+
+    def event_handler(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+Game()
