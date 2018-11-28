@@ -46,7 +46,7 @@ class Server():
 
     def broadcast_init(self):
         for i in range(0, len(self.clients)):
-            data = self.clients[i][0].recv(1024).decode()
+            data = self.clients[i][0].recv(1024).decode() ## max for packet is 65536
             print("[!] Data from: " + str(self.clients[i][1]) + ": ", data)
             if data == "--+get-init+--":
                 print("[!] Got request for initial data from " + str(self.clients[i][1]))
