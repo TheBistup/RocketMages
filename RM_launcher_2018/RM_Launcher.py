@@ -1,5 +1,7 @@
 #setup in pygame
 import pygame
+import launcher_log
+import os
 
 
 pygame.init()
@@ -8,6 +10,9 @@ display = pygame.display.set_mode((1000,600))
 pygame.display.set_caption('Rocket Mages Launcher')
 
 clock = pygame.time.Clock()
+
+log = launcher_log.GameLog()
+log.clear()
 
 open = True
 
@@ -48,9 +53,25 @@ while open == True:
 #event controller - key press ect...
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            log.log("game closed...")
             pygame.quit()
             quit()
             open = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+            if 200+150 > mouse_pos[0] > 200 and 450+100 > mouse_pos[1] > 450:
+                log.log("start button clicked...")
+                os.system("start python ../game/src/main_game.py")
+                pygame.quit()
+                quit()
+            elif 650+150 > mouse[0] > 650 and 450+100 > mouse[1] > 450:
+                log.log("Game closed by clicking quit...")
+                pygame.quit()
+                quit()
+                open = False
+            else:
+                log.log("Mouse button clicked, but nothing happened...[Error 1]")
 
     #get mouse pos and highlights if over button
     mouse = pygame.mouse.get_pos()
