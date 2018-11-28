@@ -62,7 +62,8 @@ while open == True:
             mouse_pos = pygame.mouse.get_pos()
             if 200+150 > mouse_pos[0] > 200 and 450+100 > mouse_pos[1] > 450:
                 log.log("start button clicked...")
-                os.system("start python ../game/src/main_game.py")
+                os.system("cd ../game/src/")
+                os.system("start python main_game.py")
                 pygame.quit()
                 quit()
             elif 650+150 > mouse[0] > 650 and 450+100 > mouse[1] > 450:
