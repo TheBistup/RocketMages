@@ -66,10 +66,10 @@ while open == True:
 
     smallText = pygame.font.Font("freesansbold.ttf",20)
     launch_text = smallText.render("Launch", 1, (255,255,255))
-    display.blit(launch_text,(225, 500))
+    display.blit(launch_text,(235, 500))
 
     exit_text = smallText.render("Quit",1,(255,255,255))
-    display.blit(exit_text,(675, 500))
+    display.blit(exit_text,(700, 500))
 
     fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
     display.blit(fps, (10, 10))
