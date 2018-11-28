@@ -65,23 +65,23 @@ while open == True:
 
     #get mouse pos and highlights if over button
     mouse = pygame.mouse.get_pos()
-    if 690+150 > mouse[0] > 690 and 475+100 > mouse[1] > 475:
-        pygame.draw.rect(display, bright_green,(690,475,150,118))
-        pygame.draw.rect(display, red,(840,475,150,118))
-    elif 840+150 > mouse[0] > 840 and 475+100 > mouse[1] > 475:
-        pygame.draw.rect(display, bright_red,(840,475,150,118))
-        pygame.draw.rect(display, green,(690,475,150,118))
+    if 694+150 > mouse[0] > 694 and 477+100 > mouse[1] > 477:
+        pygame.draw.rect(display, bright_green,(694,477,150,118))
+        pygame.draw.rect(display, red,(844,477,150,118))
+    elif 844+150 > mouse[0] > 840 and 477+100 > mouse[1] > 475:
+        pygame.draw.rect(display, bright_red,(844,477,150,118))
+        pygame.draw.rect(display, green,(694,477,150,118))
     else:
-        pygame.draw.rect(display, green,(690,475,150,118))
-        pygame.draw.rect(display, red,(840,475,150,118))
+        pygame.draw.rect(display, green,(694,477,150,118))
+        pygame.draw.rect(display, red,(844,477,150,118))
 
     launch_text = smallText.render("Launch", 1, (255,255,255))
-    display.blit(launch_text,(690+(150/7), 525))
+    display.blit(launch_text,(694+(150/7), 527))
 
     display.blit(image_1,(1,1))
 
     exit_text = smallText.render("Quit",1,(255,255,255))
-    display.blit(exit_text,(840+(150/5), 525))
+    display.blit(exit_text,(844+(150/5), 527))
 
 
 
