@@ -19,6 +19,7 @@ open = True
 black = (0,0,0)
 red = (200,0,0)
 green = (0,200,0)
+white = (255,255,255)
 
 bright_red = (255,0,0)
 bright_green = (0,255,0)
@@ -28,15 +29,13 @@ background = pygame.image.load('UI.png')
 #title_text = pygame.image.load('title_text.png')
 
 #getting texts setup
+mediumText = pygame.font.Font("freesansbold.ttf", 60)
 smallText = pygame.font.Font("freesansbold.ttf",28)
 font = pygame.font.SysFont(None, 25)
 
-#loading title text image
-#title_x = 185
-#title_y = 20
-
-#def RM_title():
-#    display.blit(title_text,(title_x,title_y))
+exit_text = smallText.render("Quit",1,(white))
+news = mediumText.render("News", 1, black)
+launch_text = smallText.render("Launch", 1, (white))
 
 
 #game loop
@@ -75,22 +74,15 @@ while open == True:
         pygame.draw.rect(display, green,(694,477,150,118))
         pygame.draw.rect(display, red,(844,477,150,118))
 
-    launch_text = smallText.render("Launch", 1, (255,255,255))
-    display.blit(launch_text,(694+(150/7), 527))
-
-    display.blit(image_1,(1,1))
-
-    exit_text = smallText.render("Quit",1,(255,255,255))
-    display.blit(exit_text,(844+(150/5), 527))
-
-
-
     fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
+    
+    display.blit(launch_text,(694+(150/7), 527))
+    display.blit(image_1,(1,1))
+    display.blit(exit_text,(844+(150/5), 527))
+    display.blit(news,(840-72, 25))
     display.blit(fps, (10, 10))
 
     clock.tick(144)
 
     #RM_title()
-
-
     pygame.display.update()
