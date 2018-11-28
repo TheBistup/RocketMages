@@ -40,8 +40,6 @@ class Server():
             contents = contents.split("|")
             self.client_data.append([contents[0], contents[1], str(i), 0, 0, "x"])
 
-            print(self.client_data)
-
         print("[!] Finished initial handshake with clients")
         while True:
             self.broadcast_init()
