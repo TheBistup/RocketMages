@@ -8,16 +8,28 @@ class Search():
         pass
 
 class Server():
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, username, character):
+        log.clear()
         log.log("Server class initialised.")
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock = socket.socket()
         while True:
             try:
                 self.sock.connect((ip, port))
+                break
             except:
                 delay = 2
                 log.log("Server refused connection. Wait %s seconds before retry." % (str(delay)))
-                time.sleep(2)
+                time.sleep(1)
+
+        print("[!] Got connection to server!")
+
+        if self.sock.recv(1024).decode() == "+--SEND-INIT--+":
+            print("Recieved initial character data request")
+            self.sock.send(str.encode("%s|%s" % (username, character)))
+            self.sock.recv(1024)
+            self.sock.send(str.encode("--+end+--"))
+
+            ### Get random start pos from server?
 
     def get_init(self):
         self.sock.send(str.encode("--+get-init+--"))
@@ -43,6 +55,7 @@ class Server():
             data = self.sock.recv(1024).decode()
             char_file += data
 
+
         log.log("Got character info successfully.")
 
         open("char.rminfo","w").write(char_file)
@@ -56,6 +69,7 @@ class Server():
         while "--+end+--" not in data:
             data = self.sock.recv(1024).decode()
             ent_file += data
+
 
         log.log("Got entity info successfully.")
 

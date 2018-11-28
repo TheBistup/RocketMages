@@ -35,7 +35,7 @@ class NetLog():
         self.start_time = time.time()
 
     def clear(self):
-        open("net.log","w").write("ROCKET MAGES GAME LOG")
+        open("net.log","w").write("ROCKET MAGES NET LOG")
 
     def log(self, contents):
         self.f.write("\n[%s]: %s" % (time.time()-self.start_time, contents))
