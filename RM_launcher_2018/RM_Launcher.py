@@ -29,6 +29,7 @@ bright_green = (0,255,0)
 image_1 = pygame.image.load('image_1.jpg')
 background = pygame.image.load('UI.png')
 updates = pygame.image.load('news.png')
+backgr = pygame.image.load('background.jpg')
 
 load = False
 load_x = 5
@@ -45,7 +46,7 @@ launch_text = smallText.render("Launch", 1, (white))
 
 #game loop
 while game_open == True:
-    display.blit(background,(0,0))
+    display.blit(backgr,(0,0))
 #event controller - key press ect...
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,6 +63,7 @@ while game_open == True:
                     os.chdir("../game/src/")
                     for i in range (0,300):
                         load_x += 1
+                        display.blit(backgr,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
                         display.blit(updates,(695,92))
                         display.blit(launch_text,(694+(150/7), 527))
@@ -73,6 +75,7 @@ while game_open == True:
 
                     for i in range (0,373):
                         load_x += 1
+                        display.blit(backgr,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
                         display.blit(updates,(695,92))
                         display.blit(launch_text,(694+(150/7), 527))
@@ -85,7 +88,7 @@ while game_open == True:
                     os.system("start python main_game.py")
                 pygame.quit()
                 quit()
-                
+
             elif 844+150 > mouse[0] > 844 and 477+100 > mouse[1] > 477:
                 log.log("Game closed by clicking quit...")
                 pygame.quit()
@@ -107,6 +110,7 @@ while game_open == True:
 
     fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
 
+    display.blit(background,(0,0))
     display.blit(updates,(695,92))
     display.blit(launch_text,(694+(150/7), 527))
     display.blit(image_1,(1,1))
