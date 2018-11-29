@@ -64,7 +64,10 @@ while game_open == True:
                     for i in range (0,300):
                         load_x += 1
                         display.blit(backgr,(0,0))
+                        display.blit(background,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
+                        pygame.draw.rect(display, green,(694,477,150,118))
+                        pygame.draw.rect(display, red,(844,477,150,118))
                         display.blit(updates,(695,92))
                         display.blit(launch_text,(694+(150/7), 527))
                         display.blit(image_1,(1,1))
@@ -76,7 +79,10 @@ while game_open == True:
                     for i in range (0,373):
                         load_x += 1
                         display.blit(backgr,(0,0))
+                        display.blit(background,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
+                        pygame.draw.rect(display, green,(694,477,150,118))
+                        pygame.draw.rect(display, red,(844,477,150,118))
                         display.blit(updates,(695,92))
                         display.blit(launch_text,(694+(150/7), 527))
                         display.blit(image_1,(1,1))
@@ -111,7 +117,7 @@ while game_open == True:
     fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
 
     display.blit(background,(0,0))
-    display.blit(updates,(695,92))
+    display.blit(updates,(685,75))
     display.blit(launch_text,(694+(150/7), 527))
     display.blit(image_1,(1,1))
     display.blit(exit_text,(874, 527))
