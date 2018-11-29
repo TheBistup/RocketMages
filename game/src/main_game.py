@@ -15,7 +15,11 @@ class Game():
         self.clock = pygame.time.Clock()
         self.display = pygame.display.set_mode((400, 400)) ## settings?
         self.images = {}
-        self.key_presses = {"w": 0, "a": 0, "s": 0, "d": 0}
+        self.key_presses = {"w": 0, "a": 0, "s": 0, "d": 0,
+                            "b": 0, "n": 0, "m": 0, "h": 0} ## projectile buttons
+
+        self.binds = {"b": "iceball", "n": "iceball", "m": "iceball", "h": "iceball"}
+
         self.title = "Rocket Mages Alpha"
         pygame.display.set_caption(self.title)
         self.mainloop()
@@ -39,6 +43,7 @@ class Game():
             fps = str(int(self.clock.get_fps()))
             pygame.display.set_caption("%s: %s fps" % (self.title, fps))
             pygame.display.update()
+
 
     def display_map(self, map):
         image = str("../assets/maps/%s.png" % (map))
@@ -66,6 +71,9 @@ class Game():
 
 
     def process_events(self):
+
+
+
         for i in range(0, len(self.characters)):
             if int(self.characters[i][2]) == self.indiv_number:
                 char = self.characters[i]
@@ -85,7 +93,8 @@ class Game():
 
                 return char
 
-
+    def process_entities(self, type, speed, direction, radius):
+        # entity [type, speed, direction, self.indiv_number, radius, ticks]
 
     def event_handler(self):
         for event in pygame.event.get():
