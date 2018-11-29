@@ -16,7 +16,8 @@ class Game():
         self.display = pygame.display.set_mode((400, 400)) ## settings?
         self.images = {}
         self.key_presses = {"w": 0, "a": 0, "s": 0, "d": 0}
-        pygame.display.set_caption("Rocket Mages Alpha")
+        self.title = "Rocket Mages Alpha"
+        pygame.display.set_caption(self.title)
         self.mainloop()
 
 
@@ -35,6 +36,8 @@ class Game():
             server.send_char_info(char)
 
             self.clock.tick(60) ## settings?
+            fps = str(int(self.clock.get_fps()))
+            pygame.display.set_caption("%s: %s fps" % (self.title, fps))
             pygame.display.update()
 
     def display_map(self, map):

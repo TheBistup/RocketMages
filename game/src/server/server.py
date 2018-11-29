@@ -59,6 +59,7 @@ class Server():
         pool = ThreadPool(len(self.clients))
         while True:
             pool.map(self.client_handler, self.clients)
+            ## entity handling here please!
 
 
     def client_handler(self, client):
