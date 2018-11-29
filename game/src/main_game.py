@@ -15,10 +15,15 @@ class Game():
         self.clock = pygame.time.Clock()
         self.display = pygame.display.set_mode((400, 400)) ## settings?
         self.images = {}
+        self.direction = "x"
         self.key_presses = {"w": 0, "a": 0, "s": 0, "d": 0,
-                            "b": 0, "n": 0, "m": 0, "h": 0} ## projectile buttons
+                            "b": 0, "n": 0, "m": 0} ## projectile buttons
 
-        self.binds = {"b": "iceball", "n": "iceball", "m": "iceball", "h": "iceball"}
+        # entity [type, speed, direction, self.indiv_number, radius, ticks]
+        self.binds = {"b": ["iceball", "5", self.direction, 5, -1],
+         "n": ,
+         "m": ,
+         "h":}
 
         self.title = "Rocket Mages Alpha"
         pygame.display.set_caption(self.title)
@@ -38,6 +43,9 @@ class Game():
             self.event_handler()
             char = self.process_events()
             server.send_char_info(char)
+
+            entity = self.process_entities()
+            server.send_entity
 
             self.clock.tick(60) ## settings?
             fps = str(int(self.clock.get_fps()))
@@ -72,8 +80,6 @@ class Game():
 
     def process_events(self):
 
-
-
         for i in range(0, len(self.characters)):
             if int(self.characters[i][2]) == self.indiv_number:
                 char = self.characters[i]
@@ -81,20 +87,33 @@ class Game():
                 if self.key_presses["w"] == 1:
                     char[4] -= 3
                     char[5] = "y"
+                    self.direction = "y"
                 if self.key_presses["s"] == 1:
                     char[4] += 3
                     char[5] = "-y"
+                    self.direction = "-y"
                 if self.key_presses["a"] == 1:
                     char[3] -= 3
                     char[5] = "x"
+                    self.direction = "x"
                 if self.key_presses["d"] == 1:
                     char[3] += 3
                     char[5] = "-x"
+                    self.direction = "-x"
 
                 return char
 
-    def process_entities(self, type, speed, direction, radius):
+    def process_entities(self, speed, direction, radius, ticks):
         # entity [type, speed, direction, self.indiv_number, radius, ticks]
+        entity = []
+        if self.key_presses["b"] == 1:
+            entity = self.binds["b"]
+        elif self.key_presses["n"] == 1:
+            entity = self.binds["n"]
+        elif self.key_presses["m"] == 1:
+            entity = self.binds["m"]
+
+        return entity
 
     def event_handler(self):
         for event in pygame.event.get():
