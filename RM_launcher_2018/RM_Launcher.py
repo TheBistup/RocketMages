@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 log = launcher_log.GameLog()
 log.clear()
 
-open = True
+game_open = True
 
 black = (0,0,0)
 red = (200,0,0)
@@ -28,21 +28,28 @@ image_1 = pygame.image.load('image_1.jpg')
 background = pygame.image.load('UI.png')
 #title_text = pygame.image.load('title_text.png')
 #gathering info for news paragraph
-news_info = open("")
+
+
 #getting texts setup
 mediumText = pygame.font.Font("freesansbold.ttf", 60)
 smallText = pygame.font.Font("freesansbold.ttf",28)
 tinyText = pygame.font.Font("freesansbold.ttf", 12)
 font = pygame.font.SysFont(None, 25)
 
+news_file = open('news.txt','r')
+news_info = str(news_file.read())
+label = []
+for line in news_info:
+    label.append(tinyText.render(news_info, 1, black))
+    
 exit_text = smallText.render("Quit",1,(white))
 news = mediumText.render("News", 1, black)
 launch_text = smallText.render("Launch", 1, (white))
-news_para = tinyText.render(news_info, 1, black)
+
 
 
 #game loop
-while open == True:
+while game_open == True:
     display.blit(background,(0,0))
 #event controller - key press ect...
     for event in pygame.event.get():
@@ -79,11 +86,13 @@ while open == True:
 
     fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
 
-    display.blit(news_para,(690,100))
+    #display.blit(news_para,(695,95))
     display.blit(launch_text,(694+(150/7), 527))
     display.blit(image_1,(1,1))
     display.blit(exit_text,(874, 527))
     display.blit(news,(768, 25))
+    for line in range(len(label)):
+        display.blit(label(line),(695,95+(line*fontsize)+(15*line)))
     display.blit(fps, (10, 10))
 
     clock.tick(144)

@@ -1,0 +1,4 @@
+295 MAX WIDTH
+350 MAX DEPTH 
+transparent or white background
+black text
