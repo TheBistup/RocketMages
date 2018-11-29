@@ -18,10 +18,8 @@ class Server():
                 break
             except:
                 delay = 2
-                log.log("Server refused connection. Wait %s seconds before retry." % (str(delay)))
-                time.sleep(1)
-
-        print("[!] Got connection to server!")
+                log.log("Server refused connection. Wait %s second(s) before retry." % (str(delay)))
+                time.sleep(delay)
 
         if self.sock.recv(1024).decode() == "+--SEND-INIT--+":
             self.sock.send(str.encode("%s|%s" % (username, character)))
@@ -42,4 +40,3 @@ class Server():
         self.sock.send(str.encode("--+send-char+--"))
         self.sock.recv(256)
         self.sock.send(str.encode(str(char)))
-        log.log("Sent character data")
