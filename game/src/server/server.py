@@ -62,6 +62,11 @@ class Server():
             ## entity handling here please!
             # entity [type, speed, direction, self.indiv_number, radius, ticks, [x, y]]
 
+            while "DELETE" in self.entities:
+                for j in range(0, len(self.entities)):
+                    if self.entities[j] == "DELETE":
+                        self.entities.pop(j)
+
             for i in range(0, len(self.entities)):
                 entity = self.entities[i]
                 if int(entity[5]) > 0:
