@@ -27,6 +27,7 @@ class Game():
         log.log("Connecting to: %s. Map: %s" % (server_info[0], server_info[1]))
         while not self.crashed:
             self.characters = server.get_chars()
+            self.display_map(server_info[0])
             self.display_characters()
 
             self.event_handler()
@@ -35,6 +36,17 @@ class Game():
 
             self.clock.tick(60) ## settings?
             pygame.display.update()
+
+    def display_map(self, map):
+        image = str("../assets/maps/%s.png" % (map))
+
+        try:
+            image = self.images[image]
+        except KeyError:
+            self.images[image] = pygame.image.load(image)
+            image = self.images[image]
+
+        self.display.blit(image, (0, 0))
 
     def display_characters(self):
         # self.client_data: [[username, character, number, x, y, direction]]
@@ -48,6 +60,7 @@ class Game():
                 self.images[image] = pygame.image.load(image)
                 image = self.images[image]
             self.display.blit(image, (int(char[3]), int(char[4])))
+
 
     def process_events(self):
         for i in range(0, len(self.characters)):

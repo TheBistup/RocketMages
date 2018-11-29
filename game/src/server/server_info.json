@@ -1,7 +1,7 @@
 {
 	"server_name": "Rocket Mages Server",
 	"player_number": "1",
-	"default_map": "trial.rmmap",
+	"default_map": "trial",
 	"ip": "",
 	"port": "24456"
 }
