@@ -2,6 +2,7 @@
 import pygame
 import launcher_log
 import os
+import time
 
 
 pygame.init()
@@ -20,6 +21,7 @@ black = (0,0,0)
 red = (200,0,0)
 green = (0,200,0)
 white = (255,255,255)
+blue = (30,144,255)
 
 bright_red = (255,0,0)
 bright_green = (0,255,0)
@@ -27,13 +29,9 @@ bright_green = (0,255,0)
 image_1 = pygame.image.load('image_1.jpg')
 background = pygame.image.load('UI.png')
 updates = pygame.image.load('news.png')
-#title_text = pygame.image.load('title_text.png')
-#gathering info for news paragraph
 
-#news_file = open('news.txt','r')
-#news_info = str(news_file.read())
-
-
+load = False
+load_x = 5
 #getting texts setup
 mediumText = pygame.font.Font("freesansbold.ttf", 60)
 smallText = pygame.font.Font("freesansbold.ttf",28)
@@ -43,7 +41,6 @@ font = pygame.font.SysFont(None, 25)
 exit_text = smallText.render("Quit",1,(white))
 news = mediumText.render("News", 1, black)
 launch_text = smallText.render("Launch", 1, (white))
-#news_para = tinyText.render(news_info, 1, black)
 
 
 #game loop
@@ -57,13 +54,23 @@ while game_open == True:
             quit()
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if 200+150 > mouse[0] > 200 and 450+100 > mouse[1] > 450:
+            load = True
+            if 694+150 > mouse[0] > 694 and 477+100 > mouse[1] > 477:
                 log.log("start button clicked...")
+                while load == True:
+                    pygame.draw.rect(display, blue, (3,479,load_x,114))
+                    time.sleep(0.02)
+                    load_x += 5
+                    pygame.display.update()
+                    if load_x >= 673:
+                        load = False
+
+
                 os.chdir("../game/src/")
                 os.system("start python main_game.py")
                 pygame.quit()
                 quit()
-            elif 650+150 > mouse[0] > 650 and 450+100 > mouse[1] > 450:
+            elif 844+150 > mouse[0] > 844 and 477+100 > mouse[1] > 477:
                 log.log("Game closed by clicking quit...")
                 pygame.quit()
                 quit()
