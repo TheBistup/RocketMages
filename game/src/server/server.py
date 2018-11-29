@@ -1,4 +1,5 @@
 import socket, json
+from multiprocessing.dummy import Pool as ThreadPool
 
 
 class Server():
@@ -12,15 +13,24 @@ class Server():
         with open("server_info.json","r") as file:
             data = json.load(file)
 
+        self.server = {}
+        self.server["ip"] = data["ip"]
+        self.server["port"] = int(data["port"])
+        self.server["player_number"] = int(data["player_number"])
+        self.server["server_name"] = data["server_name"]
+        self.server["map"] = data["default_map"]
+
         self.sock = socket.socket()
         self.sock.bind((data["ip"], int(data["port"])))
         self.sock.listen(int(data["player_number"]))
         self.clients = []
 
         print("[!] Self setup complete! Waiting for connections.")
+        number = 0
         for i in range(int(data["player_number"])):
             c, addr = self.sock.accept()
-            self.clients.append([c, addr])
+            self.clients.append([c, addr, number])
+            number += 1
 
         self.recieve_init()
 
@@ -38,18 +48,37 @@ class Server():
             self.clients[i][0].recv(1024).decode()
 
             contents = contents.split("|")
-            self.client_data.append([contents[0], contents[1], str(i), 0, 0, "x"])
+            self.client_data.append([contents[0], contents[1], str(i), 10, 10, "x"]) ## where we pick start position.
 
         print("[!] Finished initial handshake with clients")
         while True:
-            self.broadcast_init()
+            self.mainloop()
 
-    def broadcast_init(self):
-        for i in range(0, len(self.clients)):
-            data = self.clients[i][0].recv(1024).decode() ## max for packet is 65536
-            print("[!] Data from: " + str(self.clients[i][1]) + ": ", data)
-            if data == "--+get-init+--":
-                print("[!] Got request for initial data from " + str(self.clients[i][1]))
+
+    def mainloop(self):
+        pool = ThreadPool(len(self.clients))
+        while True:
+            pool.map(self.client_handler, self.clients)
+
+
+    def client_handler(self, client):
+
+        ## self.client_data [[username, character, number, x, y, direction]]
+        self.entity = [] ## = [[number, x, y, direction]]
+
+        data = client[0].recv(65536).decode() ## max for packet is 65536
+        if data != "":
+            print("[!] Data from: " + str(client[1]) + ": ", data)
+        if data == "--+get-init+--":
+            print("[!] Got request for initial data from " + str(client[1]))
+            message = str.encode("%s|%s|%s|%s" % (self.server["map"],
+            self.server["server_name"],
+            str(self.server["player_number"]),
+            client[2]))
+            client[0].send(message)
+
+        if data == "--+get-char+--":
+            client[0].send(str.encode(str(self.client_data)))
 
 
 

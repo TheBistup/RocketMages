@@ -1,4 +1,4 @@
-import socket, log, time
+import socket, log, time, ast
 log = log.NetLog()
 
 
@@ -24,7 +24,6 @@ class Server():
         print("[!] Got connection to server!")
 
         if self.sock.recv(1024).decode() == "+--SEND-INIT--+":
-            print("Recieved initial character data request")
             self.sock.send(str.encode("%s|%s" % (username, character)))
             self.sock.recv(1024)
             self.sock.send(str.encode("--+end+--"))
@@ -33,6 +32,11 @@ class Server():
 
     def get_init(self):
         self.sock.send(str.encode("--+get-init+--"))
+        return self.sock.recv(65536).decode().split("|")
+
+    def get_chars(self):
+        self.sock.send(str.encode("--+get-char+--"))
+        return ast.literal_eval(self.sock.recv(65536).decode())
 
     def send_char_info(user, data):
         move_to_x = data["move_to"][0]
