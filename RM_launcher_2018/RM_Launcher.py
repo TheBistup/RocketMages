@@ -57,19 +57,35 @@ while game_open == True:
             load = True
             if 694+150 > mouse[0] > 694 and 477+100 > mouse[1] > 477:
                 log.log("start button clicked...")
-                while load == True:
-                    pygame.draw.rect(display, blue, (3,479,load_x,114))
-                    time.sleep(0.02)
-                    load_x += 5
-                    pygame.display.update()
-                    if load_x >= 673:
-                        load = False
+                if load == True:
+                    #pygame.draw.rect(display, blue, (3,479,load_x,114))
+                    os.chdir("../game/src/")
+                    for i in range (0,300):
+                        load_x += 1
+                        pygame.draw.rect(display, blue, (3,479,load_x,114))
+                        display.blit(updates,(695,92))
+                        display.blit(launch_text,(694+(150/7), 527))
+                        display.blit(image_1,(1,1))
+                        display.blit(exit_text,(874, 527))
+                        display.blit(news,(768, 25))
+                        display.blit(fps, (10, 10))
+                        pygame.display.update()
 
+                    for i in range (0,373):
+                        load_x += 1
+                        pygame.draw.rect(display, blue, (3,479,load_x,114))
+                        display.blit(updates,(695,92))
+                        display.blit(launch_text,(694+(150/7), 527))
+                        display.blit(image_1,(1,1))
+                        display.blit(exit_text,(874, 527))
+                        display.blit(news,(768, 25))
+                        display.blit(fps, (10, 10))
+                        pygame.display.update()
 
-                os.chdir("../game/src/")
-                os.system("start python main_game.py")
+                    os.system("start python main_game.py")
                 pygame.quit()
                 quit()
+                
             elif 844+150 > mouse[0] > 844 and 477+100 > mouse[1] > 477:
                 log.log("Game closed by clicking quit...")
                 pygame.quit()
