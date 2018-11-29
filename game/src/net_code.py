@@ -38,17 +38,8 @@ class Server():
         self.sock.send(str.encode("--+get-char+--"))
         return ast.literal_eval(self.sock.recv(65536).decode())
 
-    def send_char_info(user, data):
-        move_to_x = data["move_to"][0]
-        move_to_y = data["move_to"][1]
-        direction = data["direction"]
-        fire_projectile_entity = data["proj_num"]
-
+    def send_char_info(self, char):
         self.sock.send(str.encode("--+send-char+--"))
-        self.sock.recv(1024)
-        self.sock.send(str.encode("%s|%s:%s|%s|%s") % (user,
-         move_to_x,
-         move_to_y,
-         direction,
-         fire_projectile_entity))
+        self.sock.recv(256)
+        self.sock.send(str.encode(str(char)))
         log.log("Sent character data")

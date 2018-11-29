@@ -1,4 +1,4 @@
-import socket, json
+import socket, json, ast
 from multiprocessing.dummy import Pool as ThreadPool
 
 
@@ -68,7 +68,8 @@ class Server():
 
         data = client[0].recv(65536).decode() ## max for packet is 65536
         if data != "":
-            print("[!] Data from: " + str(client[1]) + ": ", data)
+            #print("[!] Data from: " + str(client[1]) + ": ", data)p
+            pass
         if data == "--+get-init+--":
             print("[!] Got request for initial data from " + str(client[1]))
             message = str.encode("%s|%s|%s|%s" % (self.server["map"],
@@ -79,6 +80,13 @@ class Server():
 
         if data == "--+get-char+--":
             client[0].send(str.encode(str(self.client_data)))
+
+        if data == "--+send-char+--":
+            client[0].send(str.encode("TICK"))
+            new_data = ast.literal_eval(client[0].recv(65536).decode())
+            for i in range(0, len(self.client_data)):
+                if self.client_data[i][2] == new_data[2]:
+                    self.client_data[i] = new_data
 
 
 
