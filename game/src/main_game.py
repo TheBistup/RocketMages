@@ -15,15 +15,12 @@ class Game():
         self.clock = pygame.time.Clock()
         self.display = pygame.display.set_mode((400, 400)) ## settings?
         self.images = {}
+        self.x = 0; self.y = 0
         self.direction = "x"
         self.key_presses = {"w": 0, "a": 0, "s": 0, "d": 0,
                             "b": 0, "n": 0, "m": 0} ## projectile buttons
 
         # entity [type, speed, direction, self.indiv_number, radius, ticks]
-        self.binds = {"b": ["iceball", "5", self.direction, 5, -1],
-         "n": ,
-         "m": ,
-         "h":}
 
         self.title = "Rocket Mages Alpha"
         pygame.display.set_caption(self.title)
@@ -34,6 +31,14 @@ class Game():
         server = net_code.Server("127.0.0.1", 24456, "TrialUsername","basic")
         server_info = server.get_init()  # [map, name, number]
         self.indiv_number = int(server_info[3])
+
+        self.binds = {
+        "b": ["iceball", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]],
+        "n": ["iceball", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]],
+        "m": ["iceball", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]],
+        "h": ["iceball", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]]
+         }
+
         log.log("Connecting to: %s. Map: %s" % (server_info[0], server_info[1]))
         while not self.crashed:
             self.characters = server.get_chars()
@@ -45,7 +50,9 @@ class Game():
             server.send_char_info(char)
 
             entity = self.process_entities()
-            server.send_entity
+            if entity != []:
+                server.send_ent_info(entity)
+
 
             self.clock.tick(60) ## settings?
             fps = str(int(self.clock.get_fps()))
@@ -101,10 +108,12 @@ class Game():
                     char[5] = "-x"
                     self.direction = "-x"
 
+                self.x = char[3]
+                self.y = char[4]
+
                 return char
 
-    def process_entities(self, speed, direction, radius, ticks):
-        # entity [type, speed, direction, self.indiv_number, radius, ticks]
+    def process_entities(self):
         entity = []
         if self.key_presses["b"] == 1:
             entity = self.binds["b"]
@@ -125,23 +134,37 @@ class Game():
                             exit()
                             quit()
                 if event.key == pygame.K_w:
-                            self.key_presses["w"] = 1
+                    self.key_presses["w"] = 1
                 if event.key == pygame.K_s:
-                            self.key_presses["s"] = 1
+                    self.key_presses["s"] = 1
                 if event.key == pygame.K_a:
-                            self.key_presses["a"] = 1
+                    self.key_presses["a"] = 1
                 if event.key == pygame.K_d:
-                            self.key_presses["d"] = 1
+                    self.key_presses["d"] = 1
+
+                if event.key == pygame.K_b:
+                    self.key_presses["b"] = 1
+                if event.key == pygame.K_n:
+                    self.key_presses["n"] = 1
+                if event.key == pygame.K_m:
+                    self.key_presses["m"] = 1
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
-                            self.key_presses["w"] = 0
+                    self.key_presses["w"] = 0
                 if event.key == pygame.K_s:
-                            self.key_presses["s"] = 0
+                    self.key_presses["s"] = 0
                 if event.key == pygame.K_a:
-                            self.key_presses["a"] = 0
+                    self.key_presses["a"] = 0
                 if event.key == pygame.K_d:
-                            self.key_presses["d"] = 0
+                    self.key_presses["d"] = 0
+
+                if event.key == pygame.K_b:
+                    self.key_presses["b"] = 0
+                if event.key == pygame.K_n:
+                    self.key_presses["n"] = 0
+                if event.key == pygame.K_m:
+                    self.key_presses["m"] = 0
 
 
 

@@ -51,15 +51,33 @@ class Server():
             self.client_data.append([contents[0], contents[1], str(i), 10, 10, "x"]) ## where we pick start position.
 
         print("[!] Finished initial handshake with clients")
-        while True:
-            self.mainloop()
+        self.mainloop()
 
 
     def mainloop(self):
+        self.entities = []
         pool = ThreadPool(len(self.clients))
         while True:
             pool.map(self.client_handler, self.clients)
             ## entity handling here please!
+            # entity [type, speed, direction, self.indiv_number, radius, ticks, [x, y]]
+
+            for i in range(0, len(self.entities)):
+                entity = self.entities[i]
+                if int(entity[5]) > 0:
+                    direction = entity[2]
+                    if direction == "x":
+                        entity[6][0] = int(entity[6][0]) + int(entity[1])
+                    elif direction == "-x":
+                        entity[6][0] = int(entity[6][0]) - int(entity[1])
+                    elif direction == "y":
+                        entity[6][1] = int(entity[6][1]) - int(entity[1])
+                    elif direction == "-y":
+                        entity[6][1] = int(entity[6][1]) + int(entity[1])
+                    entity[5] = int(entity[5]) - 1
+                    self.entities[i] = entity
+
+            print(self.entities)
 
 
     def client_handler(self, client):
@@ -88,6 +106,18 @@ class Server():
             for i in range(0, len(self.client_data)):
                 if self.client_data[i][2] == new_data[2]:
                     self.client_data[i] = new_data
+            client[0].send(str.encode("TICK"))
+
+        if data == "--+send-entity+--":
+            client[0].send(str.encode("TICK"))
+            print("[!] Got entity request!")
+            new_data = ast.literal_eval(client[0].recv(65536).decode())
+            self.entities.append(new_data)
+            client[0].send(str.encode("TICK"))
+            for i in range(0, len(self.entities)):
+                if int(self.entities[i][5]) == 0:
+                    self.entities[i] == "DELETE"
+
 
 
 

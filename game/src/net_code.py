@@ -40,3 +40,10 @@ class Server():
         self.sock.send(str.encode("--+send-char+--"))
         self.sock.recv(256)
         self.sock.send(str.encode(str(char)))
+        self.sock.recv(256)
+
+    def send_ent_info(self, ent):
+        self.sock.send(str.encode("--+send-entity+--"))
+        self.sock.recv(256)
+        self.sock.send(str.encode(str(ent)))
+        self.sock.recv(256)
