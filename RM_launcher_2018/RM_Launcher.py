@@ -61,8 +61,8 @@ while game_open == True:
                 if load == True:
                     #pygame.draw.rect(display, blue, (3,479,load_x,114))
                     os.chdir("../game/src/")
-                    for i in range (0,300):
-                        load_x += 1
+                    for i in range (0,101):
+                        load_x += 3
                         display.blit(backgr,(0,0))
                         display.blit(background,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
@@ -76,8 +76,8 @@ while game_open == True:
                         display.blit(fps, (10, 10))
                         pygame.display.update()
 
-                    for i in range (0,373):
-                        load_x += 1
+                    for i in range (0,121):
+                        load_x += 3
                         display.blit(backgr,(0,0))
                         display.blit(background,(0,0))
                         pygame.draw.rect(display, blue, (3,479,load_x,114))
