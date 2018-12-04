@@ -20,6 +20,7 @@ class Server():
         self.server["server_name"] = data["server_name"]
         self.server["map"] = data["default_map"]
 
+
         self.sock = socket.socket()
         self.sock.bind((data["ip"], int(data["port"])))
         self.sock.listen(int(data["player_number"]))
@@ -62,10 +63,13 @@ class Server():
             ## entity handling here please!
             # entity [type, speed, direction, self.indiv_number, radius, ticks, [x, y]]
 
-            while "DELETE" in self.entities:
-                for j in range(0, len(self.entities)):
-                    if self.entities[j] == "DELETE":
-                        self.entities.pop(j)
+
+            new_entities = []
+            for i in range(0, len(self.entities)):
+                entity = self.entities[i]
+                if entity[5] > 0:
+                    new_entities.append(entity)
+            self.entities = new_entities
 
             for i in range(0, len(self.entities)):
                 entity = self.entities[i]
@@ -81,8 +85,6 @@ class Server():
                         entity[6][1] = int(entity[6][1]) + int(entity[1])
                     entity[5] = int(entity[5]) - 1
                     self.entities[i] = entity
-
-            print(self.entities)
 
 
     def client_handler(self, client):
@@ -115,13 +117,14 @@ class Server():
 
         if data == "--+send-entity+--":
             client[0].send(str.encode("TICK"))
-            print("[!] Got entity request!")
             new_data = ast.literal_eval(client[0].recv(65536).decode())
-            self.entities.append(new_data)
             client[0].send(str.encode("TICK"))
-            for i in range(0, len(self.entities)):
-                if int(self.entities[i][5]) == 0:
-                    self.entities[i] == "DELETE"
+
+            self.entities.append(new_data)
+
+        if data == "--+get-entity+--":
+            client[0].send(str.encode(str(self.entities)))
+
 
 
 

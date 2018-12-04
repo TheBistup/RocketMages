@@ -47,3 +47,8 @@ class Server():
         self.sock.recv(256)
         self.sock.send(str.encode(str(ent)))
         self.sock.recv(256)
+
+    def get_ents(self):
+        self.sock.send(str.encode("--+get-entity+--"))
+        data = self.sock.recv(65536).decode()
+        return ast.literal_eval(data)
