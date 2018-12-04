@@ -91,7 +91,7 @@ while game_open == True:
                         display.blit(fps, (10, 10))
                         pygame.display.update()
 
-                    os.system("start python main_game.py")
+                    os.system("start python launch_options.py")
                 pygame.quit()
                 quit()
 

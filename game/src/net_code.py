@@ -5,7 +5,22 @@ log = log.NetLog()
 
 class Search():
     def __init__(self):
-        pass
+        self.my_ip = socket.gethostbyname(socket.gethostname()).split(".")
+        self.my_ip = str(self.my_ip[0] + self.my_ip[1] + self.my_ip[2])
+        self.sock = socket.socket()
+        self.search_port = 24456
+        log.clear()
+
+
+    def find(self):
+        games = []
+        for i in range(0, 256):
+            ip = self.my_ip + str(".%s" % (str(i)))
+            result = sock.connect_ex(('127.0.0.1', self.search_port)) # TODO: Nope! We need to create a search port open for game finding
+            if result == 0:
+                log.log("Found game at IP: %s" % (ip))
+                games.append(ip)
+        return games
 
 class Server():
     def __init__(self, ip, port, username, character):
