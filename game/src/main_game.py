@@ -39,8 +39,8 @@ class Game():
         log.log("Connecting to: %s. Map: %s" % (server_info[0], server_info[1]))
         while not self.crashed:
             self.binds = {
-            "b": ["nerph_rebel", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]],
-            "n": ["large_rocket", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]],
+            "b": ["nerph_rebel", "5", self.direction, self.indiv_number, 5, 60, [self.x, self.y]],
+            "n": ["large_rocket", "5", self.direction, self.indiv_number, 5, 300, [self.x, self.y]],
             "m": ["massive_shuriken", "5", self.direction, self.indiv_number, 5, 50, [self.x, self.y]],
             "h": ["kim_ballistic", "5", self.direction, self.indiv_number, 5, 100, [self.x, self.y]]
              }
@@ -84,6 +84,13 @@ class Game():
             except KeyError:
                 self.images[image] = pygame.image.load(image)
                 image = self.images[image]
+
+            if entity[2] == "-x":
+                image = pygame.transform.rotate(image, 180)
+            if entity[2] == "y":
+                image = pygame.transform.rotate(image, 90)
+            if entity[2] == "-y":
+                image = pygame.transform.rotate(image, -90)
 
             self.display.blit(image, (entity[6][0], entity[6][1]))
 
