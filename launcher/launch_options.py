@@ -1,4 +1,5 @@
-import pygame, os
+import pygame
+import os
 
 class Menu():
     def __init__(self):
@@ -29,10 +30,11 @@ class Menu():
 
     def text(self):
         smallText = pygame.font.Font("freesansbold.ttf", 14)
+        miniText = pygame.font.Font("freesansbold.ttf", 13)
         LAN = smallText.render("Launch LAN server", 1, (255, 255, 255))
         self.display.blit(LAN, (18,55))
-        search = smallText.render("Search for a game", 1, (255, 255, 255))
-        self.display.blit(search, (203,55))
+        search = miniText.render("Search for a local game", 1, (255, 255, 255))
+        self.display.blit(search, (192,55))
 
 
     def event_manager(self):
@@ -52,8 +54,18 @@ class Menu():
 
                 elif 340 > self.pos[0] > 190 and 110 > self.pos[1] > 10:
                     os.chdir("../game/src")
-                    search = net_code.Search()
-                    print(search.search())
+                    try:
+                        import net_code
+                        #using The Bistup's netcode module to search for the correct IP address
+                        search = net_code.Search()
+                        print(search.search())
+                    except:
+                         self.error()
+
+    def error(self):
+        from tkinter import messagebox as msgbox
+        msgbox.showerror("exception", "Unable to connect[!]")
+
 
     def highlight(self):
         if 160 > self.pos[0] > 10 and 110 > self.pos[1] > 10:
