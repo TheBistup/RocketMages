@@ -14,6 +14,7 @@ class Game():
         self.crashed = False
         self.clock = pygame.time.Clock()
         self.display = pygame.display.set_mode((400, 400)) ## settings?
+        pygame.display.set_icon(pygame.image.load("../assets/icons/rocketmages.ico"))
         self.images = {}
         self.entities = []
         self.x = 0; self.y = 0
