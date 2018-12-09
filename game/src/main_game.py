@@ -36,9 +36,17 @@ class Game():
         server_info = server.get_init()  # [map, name, number]
         self.indiv_number = int(server_info[3])
 
+        pygame.mixer.init()
+        music = pygame.mixer.Sound("../assets/music/wav/main_theme.wav")
+
 
         log.log("Connecting to: %s. Map: %s" % (server_info[0], server_info[1]))
+        channel = music.play()
         while not self.crashed:
+
+            if channel.get_busy() != True:
+                channel = music.play()
+
             self.binds = {
             "b": ["nerph_rebel", "5", self.direction, self.indiv_number, 5, 60, [self.x, self.y]],
             "n": ["large_rocket", "5", self.direction, self.indiv_number, 5, 300, [self.x, self.y]],
